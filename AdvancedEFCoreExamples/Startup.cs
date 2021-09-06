@@ -30,7 +30,7 @@ namespace AdvancedEFCoreExamples
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CrmContext>(options =>
-                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CrmDB;Trusted_Connection=True;"));
+                options.UseSqlServer(Configuration.GetConnectionString("mssql")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
