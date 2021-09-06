@@ -24,9 +24,40 @@ namespace AdvancedEFCoreExamples.Controllers
         [HttpGet]
         public async Task<IEnumerable<Call>> Get()
         {
-            var calls = await _context.Calls.ToListAsync();
-
-            return calls.AsEnumerable();
+            return await _context.Calls.ToListAsync();
         }
+
+        [HttpGet("avgCallDurationByEmployee")]
+        public async Task<IEnumerable<CallDurationByEmployeeModel>> GetAverageCallDurationByEmployee()
+        {
+            var result = await _context.Calls.Include(c => c.Employee).GroupBy(c => c.EmployeeId).Select(g =>
+                new CallDurationByEmployeeModel()
+                {
+                    EmployeeName = g.Key.ToString(),
+                    CallDuration = g.Average(c => EF.Functions.DateDiffMinute(c.StartTime, c.EndTime))
+                }).ToListAsync();
+
+            return result;
+        }
+
+        [HttpGet("avgLeadCallDurationByEmployee")]
+        public async Task<IEnumerable<CallDurationByEmployeeModel>> avgLeadCallDurationByEmployee()
+        {
+        }
+
+        [HttpGet("avgComplaintCallDurationByEmployee")]
+        public async Task<IEnumerable<CallDurationByEmployeeModel>> avgComplaintCallDurationByEmployee()
+        {
+        }
+
+        [HttpGet("employeeWithMaxLeads")]
+        public async Task<IEnumerable<CallDurationByEmployeeModel>> employeeWithMaxLeads()
+        {
+        }
+
+        public class CallDurationByEmployeeModel
+    {
+        public string EmployeeName { get; set; }
+        public double CallDuration { get; set; }
     }
 }
