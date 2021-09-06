@@ -67,6 +67,14 @@ namespace AdvancedEFCoreExamples.Domains.CRM.Context
 
             modelBuilder.Entity<Customer>().HasData(customers);
 
+            var outcomes = Enumerable.Range(1, 500).Select(index => new CallOutcome()
+            {
+                CallId = index,
+                Type = Enum.GetValues<OutcomeType>()[rng.Next(Enum.GetValues<OutcomeType>().Length)]
+            }).ToArray();
+
+            modelBuilder.Entity<CallOutcome>().HasData(outcomes);
+
             var calls = Enumerable.Range(1, 500).Select(index => new Call()
             {
                 Id = index,
@@ -74,6 +82,7 @@ namespace AdvancedEFCoreExamples.Domains.CRM.Context
                 EmployeeId = employees[rng.Next(employees.Length)].Id,
                 StartTime = DateTime.Now.AddMinutes(-1 * rng.Next(2000, 2050)),
                 EndTime = DateTime.Now.AddMinutes(-1 * rng.Next(1950, 2000)),
+                OutcomeId = index
             }).ToArray();
 
             modelBuilder.Entity<Call>().HasData(calls);

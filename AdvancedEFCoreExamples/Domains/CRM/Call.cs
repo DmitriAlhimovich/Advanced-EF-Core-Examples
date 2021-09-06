@@ -17,6 +17,7 @@ namespace AdvancedEFCoreExamples.Domains.CRM
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
+        public int OutcomeId { get; set; }
         public CallOutcome Outcome { get; set; }
     }
 }
