@@ -40,22 +40,23 @@ namespace AdvancedEFCoreExamples.Controllers
             return result;
         }
 
-        [HttpGet("avgLeadCallDurationByEmployee")]
-        public async Task<IEnumerable<CallDurationByEmployeeModel>> avgLeadCallDurationByEmployee()
-        {
-        }
+        //[HttpGet("avgLeadCallDurationByEmployee")]
+        //public async Task<IEnumerable<CallDurationByEmployeeModel>> avgLeadCallDurationByEmployee()
+        //{
+        //}
 
-        [HttpGet("avgComplaintCallDurationByEmployee")]
-        public async Task<IEnumerable<CallDurationByEmployeeModel>> avgComplaintCallDurationByEmployee()
-        {
-        }
+        //[HttpGet("avgComplaintCallDurationByEmployee")]
+        //public async Task<IEnumerable<CallDurationByEmployeeModel>> avgComplaintCallDurationByEmployee()
+        //{
+        //}
 
-        [HttpGet("employeeWithMaxLeads")]
-        public async Task<IEnumerable<CallDurationByEmployeeModel>> employeeWithMaxLeads()
-        {
-        }
+        //[HttpGet("employeeWithMaxLeads")]
+        //public async Task<IEnumerable<CallDurationByEmployeeModel>> employeeWithMaxLeads()
+        //{
+        //}
+    }
 
-        public class CallDurationByEmployeeModel
+    public class CallDurationByEmployeeModel
     {
         public string EmployeeName { get; set; }
         public double CallDuration { get; set; }
