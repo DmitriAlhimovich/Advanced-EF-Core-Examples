@@ -30,10 +30,10 @@ namespace AdvancedEFCoreExamples.Controllers
         [HttpGet("avgCallDurationByEmployee")]
         public async Task<IEnumerable<CallDurationByEmployeeModel>> GetAverageCallDurationByEmployee()
         {
-            var result = await _context.Calls.Include(c => c.Employee).GroupBy(c => c.EmployeeId).Select(g =>
+            var result = await _context.Calls.Include(c => c.Employee).GroupBy(c => new {c.EmployeeId, c.Employee.LastName}).Select(g =>
                 new CallDurationByEmployeeModel()
                 {
-                    EmployeeName = g.Key.ToString(),
+                    EmployeeName = g.Key.LastName,
                     CallDuration = g.Average(c => EF.Functions.DateDiffMinute(c.StartTime, c.EndTime))
                 }).ToListAsync();
 
